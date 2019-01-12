@@ -12,9 +12,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Setter
 @Getter
-public class Tag {
+@Setter
+public class Item {
 
   @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
   private List<ItemTag> itemTagList = new ArrayList<>();
@@ -23,6 +23,7 @@ public class Tag {
   @GeneratedValue
   private int id;
 
-  @Column(length = 20, nullable = false)
+  @Column(length = 50, nullable = false)
   private String name;
+
 }
