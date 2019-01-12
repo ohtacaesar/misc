@@ -6,7 +6,9 @@
 
 <div layout:fragment="content">
   <ul>
-    <li th:each="t : ${tags}" th:text="${t.name}"></li>
+    <li th:each="o : ${itemList}">
+      <a th:href="@{/items/{itemId}(itemId=${o.id})}"
+         th:text="|${o.id} - ${o.name}|"></a></li>
   </ul>
 </div>
 </body>
