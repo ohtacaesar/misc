@@ -17,14 +17,6 @@ public class Config {
 
   @PostConstruct
   public void init() {
-    List<Item> itemList = new ArrayList<>();
-    for (int i = 0; i < 10; i++) {
-      Item item = new Item();
-      item.setName("アイテム" + i);
-      itemList.add(item);
-    }
-    itemRepository.save(itemList);
-
     List<Tag> tagList = new ArrayList<>();
     for (int i = 0; i < 10; i++) {
       Tag tag = new Tag();
@@ -32,5 +24,18 @@ public class Config {
       tagList.add(tag);
     }
     tagRepository.save(tagList);
+
+    List<Item> itemList = new ArrayList<>();
+    for (int i = 0; i < 10; i++) {
+      Item item = new Item();
+      item.setName("アイテム" + i);
+      itemList.add(item);
+
+      ItemTag itemTag = new ItemTag();
+      itemTag.setItem(item);
+      itemTag.setTag(tagList.get(i));
+      item.getItemTagList().add(itemTag);
+    }
+    itemRepository.save(itemList);
   }
 }
