@@ -1,5 +1,6 @@
 package com.ohtacaesar.misc.spring_boot_sandbox;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -16,6 +17,7 @@ import lombok.Setter;
 @Setter
 public class Item {
 
+  @JsonIgnore
   @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
   private List<ItemTag> itemTagList = new ArrayList<>();
 
