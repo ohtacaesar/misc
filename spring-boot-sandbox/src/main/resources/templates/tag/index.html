@@ -5,11 +5,22 @@
 <body>
 
 <div layout:fragment="content">
-  <ul>
-    <li th:each="t : ${tagList}">
-      <a th:href="@{/tags/{tagId}(tagId=${t.id})}"
-         th:text="|${t.id} - ${t.name}|"></a></li>
-  </ul>
+  <table>
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="o : ${tagList}">
+      <td th:text="${o.id}"></td>
+      <td th:text="${o.name}"></td>
+      <td><a th:href="@{/tags/{tagId}(tagId=${o.id})}">show</a> | <a
+          th:href="@{/tags/{tagId}.json(tagId=${o.id})}">json</a></td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 </body>
 </html>
