@@ -1,6 +1,8 @@
 package com.ohtacaesar.misc.spring_boot_sandbox;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -15,10 +17,13 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id"
+)
 public class Tag {
 
   @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
-  @JsonIgnore
   private List<ItemTag> itemTagList = new ArrayList<>();
 
   @Id
