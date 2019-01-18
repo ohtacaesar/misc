@@ -17,8 +17,9 @@ public class ItemController {
   private ItemRepository itemRepository;
 
   @GetMapping("")
-  public String itemIndex(Model model) {
+  public String itemIndex(Model model, Item item) {
     model.addAttribute("itemList", itemRepository.findAll());
+    model.addAttribute("item", item);
 
     return "item/index";
   }
