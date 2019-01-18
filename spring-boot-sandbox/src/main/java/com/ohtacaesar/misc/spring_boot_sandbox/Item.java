@@ -1,7 +1,7 @@
 package com.ohtacaesar.misc.spring_boot_sandbox;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,12 @@ import lombok.Setter;
 public class Item {
 
   @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
+  @JsonIdentityReference(alwaysAsId = true)
   private List<ItemTag> itemTagList = new ArrayList<>();
+
+  public List<ItemTag> getItemTags() {
+    return this.getItemTagList();
+  }
 
   @Id
   @GeneratedValue
@@ -32,5 +37,6 @@ public class Item {
 
   @Column(length = 50, nullable = false)
   private String name;
+
 
 }
