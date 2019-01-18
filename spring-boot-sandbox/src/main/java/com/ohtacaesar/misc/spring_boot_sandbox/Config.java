@@ -13,6 +13,9 @@ public class Config {
   private ItemRepository itemRepository;
 
   @Autowired
+  private ProductRepository productRepository;
+
+  @Autowired
   private TagRepository tagRepository;
 
   @PostConstruct
@@ -37,5 +40,14 @@ public class Config {
       item.getItemTagList().add(itemTag);
     }
     itemRepository.save(itemList);
+
+    List<Product> productList = new ArrayList<>();
+    for (int i = 0; i < 10; i++) {
+      Product product = new Product();
+      product.setName("プロダクト" + i);
+      product.getTagList().add(tagList.get(i));
+      productList.add(product);
+    }
+    productRepository.save(productList);
   }
 }
