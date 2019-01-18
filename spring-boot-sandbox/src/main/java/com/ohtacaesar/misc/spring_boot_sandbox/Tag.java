@@ -1,7 +1,9 @@
 package com.ohtacaesar.misc.spring_boot_sandbox;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.ohtacaesar.misc.spring_boot_sandbox.Views.Simple;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -27,8 +29,10 @@ public class Tag {
 
   @Id
   @GeneratedValue
+  @JsonView(Simple.class)
   private int id;
 
   @Column(length = 20, nullable = false)
+  @JsonView(Simple.class)
   private String name;
 }
