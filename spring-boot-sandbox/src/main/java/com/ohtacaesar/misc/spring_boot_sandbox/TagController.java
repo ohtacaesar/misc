@@ -1,5 +1,7 @@
 package com.ohtacaesar.misc.spring_boot_sandbox;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ohtacaesar.misc.spring_boot_sandbox.Views.Simple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -16,18 +18,26 @@ public class TagController {
   @Autowired
   private TagRepository tagRepository;
 
-  @GetMapping("")
+  @GetMapping()
   public String index(Model model) {
     model.addAttribute("tagList", tagRepository.findAll());
 
     return "tag/index";
   }
 
-  @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
   public Iterable<Tag> indexJson() {
     return tagRepository.findAll();
   }
+
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, params = "type=simple")
+  @ResponseBody
+  @JsonView(Simple.class)
+  public Iterable<Tag> simple() {
+    return tagRepository.findAll();
+  }
+
 
   @GetMapping("/{tagId}")
   public String show(Model model, @PathVariable int tagId) {
