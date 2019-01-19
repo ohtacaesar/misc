@@ -4,8 +4,17 @@
       layout:decorator="layout">
 <body>
 
-<div layout:fragment="content">
+<th:block layout:fragment="content">
   <h2>Product</h2>
+  <form th:action="@{/products}" method="post" id="product-create-form" th:object="${product}">
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+    <label>name
+      <input th:field="*{name}"/>
+    </label><br/>
+    <button type="submit">作成(x-www-form-urlencoded)</button>
+    |
+    <button type="button" id="product-create-submit">作成(json)</button>
+  </form>
   <table>
     <thead>
     <tr>
@@ -23,6 +32,34 @@
     </tr>
     </tbody>
   </table>
-</div>
+</th:block>
+
+<th:block layout:fragment="js">
+  <script>
+    $(function () {
+      var $form = $('#product-create-form');
+
+      $("#product-create-submit").on('click', function () {
+        var o = createObjectFromForm($form);
+
+        $.ajax({
+          url: $form.attr('action'),
+          data: JSON.stringify(o),
+          method: 'POST',
+          contentType: 'application/json'
+        })
+      });
+    });
+
+    function createObjectFromForm($form) {
+      var o = {};
+      $form.find('input').each(function (index, input) {
+        o[input.getAttribute('name')] = input.value;
+      });
+
+      return o;
+    }
+  </script>
+</th:block>
 </body>
 </html>

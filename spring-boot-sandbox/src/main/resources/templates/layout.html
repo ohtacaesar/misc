@@ -7,6 +7,7 @@
 </head>
 
 <body>
+<input type="hidden" id="context-path" th:value="@{/}"/>
 <div>
   <h1><a href="/">テスト</a></h1>
   <div>
@@ -15,5 +16,19 @@
   </div>
   <th:block layout:fragment="content"></th:block>
 </div>
+
+
+<script>
+  var CONTEXT_PATH = document.getElementById("context-path").value.slice(0, -1);
+
+  function createPath(path) {
+    return CONTEXT_PATH + path;
+  }
+
+</script>
+
+<script th:src="@{/jquery-3.3.1.min.js}"></script>
+
+<th:block layout:fragment="js"></th:block>
 </body>
 </html>

@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Setter
@@ -36,6 +37,7 @@ public class Product {
   private int id;
 
   @Column(length = 50, nullable = false)
+  @NotBlank
   private String name;
 
 }
