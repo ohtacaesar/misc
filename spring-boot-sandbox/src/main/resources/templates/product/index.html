@@ -11,6 +11,10 @@
     <label>name
       <input th:field="*{name}"/>
     </label><br/>
+    <p th:if="${#fields.hasErrors('url')}" th:errors="*{url}"></p>
+    <label>url
+      <input th:field="*{url}"/>
+    </label><br/>
     <button type="submit">作成(x-www-form-urlencoded)</button>
     |
     <button type="button" id="product-create-submit">作成(json)</button>

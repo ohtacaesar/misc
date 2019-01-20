@@ -40,4 +40,7 @@ public class Product {
   @NotBlank
   private String name;
 
+  @Column
+  private String url;
+
 }

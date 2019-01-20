@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/products")
@@ -52,17 +53,17 @@ public class ProductController {
 
   @PostMapping
   public String create(
-      Model model,
       // @Validatedつけるとエラーページに飛ばない
       @Validated Product product,
-      BindingResult bindingResult
+      BindingResult bindingResult,
+      RedirectAttributes attributes
   ) {
-
     if (bindingResult.hasErrors()) {
-      return index(model);
+      attributes.addFlashAttribute("product", product);
+      attributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "product", bindingResult);
+    } else {
+      productRepository.save(product);
     }
-
-    productRepository.save(product);
 
     return "redirect:/products";
   }
