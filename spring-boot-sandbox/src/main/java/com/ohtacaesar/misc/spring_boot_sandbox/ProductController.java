@@ -1,6 +1,7 @@
 package com.ohtacaesar.misc.spring_boot_sandbox;
 
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -60,7 +61,10 @@ public class ProductController {
   ) {
     if (bindingResult.hasErrors()) {
       attributes.addFlashAttribute("product", product);
-      attributes.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "product", bindingResult);
+      attributes.addFlashAttribute(
+          BindingResult.MODEL_KEY_PREFIX + bindingResult.getObjectName(),
+          bindingResult
+      );
     } else {
       productRepository.save(product);
     }
@@ -72,9 +76,11 @@ public class ProductController {
   @ResponseBody
   public Object createJson(
       @RequestBody @Validated Product product,
-      BindingResult bindingResult
+      BindingResult bindingResult,
+      HttpServletResponse response
   ) {
     if (bindingResult.hasErrors()) {
+      response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       return bindingResult.getAllErrors();
     }
 
