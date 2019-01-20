@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/misc.iml" filepath="$PROJECT_DIR$/.idea/misc.iml" />
       <module fileurl="file://$PROJECT_DIR$/python-sandbox/python-sandbox.iml" filepath="$PROJECT_DIR$/python-sandbox/python-sandbox.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-boot-sandbox/spring-boot-sandbox.iml" filepath="$PROJECT_DIR$/spring-boot-sandbox/spring-boot-sandbox.iml" />
     </modules>
