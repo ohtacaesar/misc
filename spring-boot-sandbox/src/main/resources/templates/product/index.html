@@ -7,14 +7,12 @@
 <th:block layout:fragment="content">
   <h2>Product</h2>
   <form th:action="@{/products}" method="post" id="product-create-form" th:object="${product}">
-    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-    <label>name
-      <input th:field="*{name}"/>
-    </label><br/>
-    <p th:if="${#fields.hasErrors('url')}" th:errors="*{url}"></p>
-    <label>url
-      <input th:field="*{url}"/>
-    </label><br/>
+    <p><label>name<input th:field="*{name}"/></label></p>
+    <p th:errors="*{name}"></p>
+    <p id="name-error" style="display: none"></p>
+    <p><label>url <input th:field="*{url}"/></label></p>
+    <p th:errors="*{url}"></p>
+    <p id="url-error" style="display: none"></p>
     <button type="submit">作成(x-www-form-urlencoded)</button>
     |
     <button type="button" id="product-create-submit">作成(json)</button>
@@ -39,30 +37,61 @@
 </th:block>
 
 <th:block layout:fragment="js">
-  <script>
+  <script th:inline="javascript">
+    /*<![CDATA[>*/
     $(function () {
-      var $form = $('#product-create-form');
+      var $form = $('#product-create-form'),
+          fieldNames = createFieldNameList($form);
 
       $("#product-create-submit").on('click', function () {
         var o = createObjectFromForm($form);
 
         $.ajax({
           url: $form.attr('action'),
-          data: JSON.stringify(o),
           method: 'POST',
-          contentType: 'application/json'
+          contentType: 'application/json',
+          data: JSON.stringify(o),
+          dataType: 'json',
+        }).done(function () {
+          clearErrors();
+        }).fail(function (data) {
+          renderErrors(data.responseJSON);
         })
       });
+
+      function createFieldNameList($form) {
+        var a = [];
+        $form.find('input').map(function (index, input) {
+          a.push(input.getAttribute('name'));
+        });
+
+        return a;
+      }
+
+      function createObjectFromForm($form) {
+        var o = {};
+        $form.find('input').each(function (index, input) {
+          o[input.getAttribute('name')] = input.value;
+        });
+
+        return o;
+      }
+
+      function renderErrors(errors) {
+        for (var i = 0, l = errors.length; i < l; i++) {
+          var error = errors[i];
+          $("#" + error.field + '-error').text(error.defaultMessage).css('display', 'block');
+        }
+      }
+
+      function clearErrors() {
+        for (var i = 0; i < fieldNames.length; i++) {
+          $("#" + fieldNames[i] + '-error').css('display', 'none');
+        }
+      }
     });
 
-    function createObjectFromForm($form) {
-      var o = {};
-      $form.find('input').each(function (index, input) {
-        o[input.getAttribute('name')] = input.value;
-      });
-
-      return o;
-    }
+    /*]]>*/
   </script>
 </th:block>
 </body>
