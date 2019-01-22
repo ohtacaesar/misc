@@ -18,6 +18,9 @@ public class Config {
   @Autowired
   private TagRepository tagRepository;
 
+  @Autowired
+  private AccountRepository accountRepository;
+
   @PostConstruct
   public void init() {
     List<Tag> tagList = new ArrayList<>();
@@ -49,5 +52,11 @@ public class Config {
       productList.add(product);
     }
     productRepository.save(productList);
+
+    Account account = new Account();
+    account.setUsername("root");
+    account.setPassword("root");
+    accountRepository.save(account);
   }
+
 }

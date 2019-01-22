@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <meta charset="UTF-8"/>
   <title>テスト</title>
@@ -12,7 +13,8 @@
   <h1><a href="/">テスト</a></h1>
   <div>
     <a th:href="@{/tags}">タグ</a> | <a th:href="@{/items}">アイテム</a> | <a
-      th:href="@{/products}">プロダクト</a>
+      th:href="@{/products}">プロダクト</a> | <a th:href="@{/security}">セキュリティ</a> | <a
+      th:href="@{/admin}">アドミン</a>
   </div>
   <th:block layout:fragment="content"></th:block>
 </div>

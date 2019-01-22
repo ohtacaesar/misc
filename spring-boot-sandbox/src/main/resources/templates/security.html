@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+
+<div layout:fragment="content">
+  <h1>Security</h1>
+  <p th:text="|Username: ${auth.name}|"></p>
+  <h2>Roles</h2>
+  <ul>
+    <li th:each="a : ${auth.authorities}" th:text="${a}"></li>
+  </ul>
+</div>
+</body>
+</html>
