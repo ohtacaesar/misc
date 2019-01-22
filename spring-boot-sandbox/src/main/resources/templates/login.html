@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+
+<div layout:fragment="content">
+  <form th:action="@{/login}" method="post">
+    <label>
+      username: <input type="text" name="username"/>
+    </label>
+    <label>
+      password: <input type="password" name="password"/>
+    </label>
+    <button type="submit">ログイン</button>
+  </form>
+</div>
+</body>
+</html>
