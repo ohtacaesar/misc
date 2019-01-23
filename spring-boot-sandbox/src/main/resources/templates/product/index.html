@@ -44,12 +44,19 @@
           fieldNames = createFieldNameList($form);
 
       $("#product-create-submit").on('click', function () {
-        var o = createObjectFromForm($form);
+        var o = createObjectFromForm($form),
+            token = getCsrf($form);
+
+        var headers = {};
+        if (token) {
+          headers['X-CSRF-TOKEN'] = token;
+        }
 
         $.ajax({
           url: $form.attr('action'),
           method: 'POST',
           contentType: 'application/json',
+          headers: headers,
           data: JSON.stringify(o),
           dataType: 'json',
         }).done(function () {
@@ -71,10 +78,17 @@
       function createObjectFromForm($form) {
         var o = {};
         $form.find('input').each(function (index, input) {
-          o[input.getAttribute('name')] = input.value;
+          var name = input.getAttribute('name');
+          if (name[0] && name[0] !== "_") {
+            o[name] = input.value;
+          }
         });
 
         return o;
+      }
+
+      function getCsrf($form) {
+        return $form.find("input[name='_csrf']").val();
       }
 
       function renderErrors(errors) {

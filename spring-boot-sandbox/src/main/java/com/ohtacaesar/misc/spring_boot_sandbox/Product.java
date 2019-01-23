@@ -36,7 +36,7 @@ public class Product {
   @GeneratedValue
   private int id;
 
-  @Column(length = 50, nullable = false)
+  @Column(length = 50, unique = true, nullable = false)
   @NotBlank
   private String name;
 
