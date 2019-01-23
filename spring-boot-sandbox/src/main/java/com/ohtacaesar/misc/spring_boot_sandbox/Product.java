@@ -41,6 +41,7 @@ public class Product {
   private String name;
 
   @Column
+  @NotBlank
   private String url;
 
 }
