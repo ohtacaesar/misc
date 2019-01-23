@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,15 +60,22 @@ public class ProductController {
       BindingResult bindingResult,
       RedirectAttributes attributes
   ) {
+    if (productRepository.findByName(product.getName()) != null) {
+      bindingResult.addError(
+          new FieldError(bindingResult.getObjectName(), "name", "a name must be unique")
+      );
+    }
+
     if (bindingResult.hasErrors()) {
       attributes.addFlashAttribute("product", product);
       attributes.addFlashAttribute(
           BindingResult.MODEL_KEY_PREFIX + bindingResult.getObjectName(),
           bindingResult
       );
-    } else {
-      productRepository.save(product);
+      return "redirect:/products";
     }
+
+    productRepository.save(product);
 
     return "redirect:/products";
   }

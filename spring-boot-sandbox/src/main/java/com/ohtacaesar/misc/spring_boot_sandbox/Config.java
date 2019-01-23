@@ -48,6 +48,7 @@ public class Config {
     for (int i = 0; i < 10; i++) {
       Product product = new Product();
       product.setName("プロダクト" + i);
+      product.setUrl("プロダクト" + i);
       product.getTagList().add(tagList.get(i));
       productList.add(product);
     }
