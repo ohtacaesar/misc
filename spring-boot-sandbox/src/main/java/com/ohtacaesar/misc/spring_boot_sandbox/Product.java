@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotBlank;
@@ -28,7 +29,8 @@ public class Product {
   @JoinTable(
       name = "TAG_PRODUCT",
       joinColumns = @JoinColumn(name = "PRODUCT_ID"),
-      inverseJoinColumns = @JoinColumn(name = "TAG_ID")
+      inverseJoinColumns = @JoinColumn(name = "TAG_ID"),
+      uniqueConstraints = @UniqueConstraint(columnNames = {"PRODUCT_ID", "TAG_ID"})
   )
   private List<Tag> tagList = new ArrayList<>();
 

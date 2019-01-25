@@ -43,7 +43,7 @@ public class Tag {
   @JsonView(Simple.class)
   private int id;
 
-  @Column(length = 20, nullable = false)
+  @Column(length = 20, nullable = false, unique = true)
   @JsonView(Simple.class)
   private String name;
 }
