@@ -31,6 +31,11 @@
              th:text="${o.history.name}"></a></td>
       <td th:text="${o.history.url}"></td>
       <td th:text="${o.history.company.id}"></td>
+      <td>
+        <form th:action="@{/companies/{id}(id=${o.id})}" method="post">
+          <button type="submit" name="_method" value="DELETE">削除</button>
+        </form>
+      </td>
     </tr>
     </tbody>
   </table>

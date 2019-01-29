@@ -21,11 +21,11 @@ import lombok.Setter;
 )
 public class Company {
 
-  @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-  private List<CompanyHistory> historyList;
-
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne(cascade = CascadeType.PERSIST)
   private CompanyHistory history = new CompanyHistory();
+
+  @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE)
+  private List<CompanyHistory> historyList;
 
   @Id
   @GeneratedValue

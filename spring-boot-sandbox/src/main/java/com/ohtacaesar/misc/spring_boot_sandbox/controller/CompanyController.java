@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,10 +37,7 @@ public class CompanyController {
 
   @GetMapping("/{companyId}")
   public String show(Model model, @PathVariable int companyId) {
-    Company company = companyRepository.findOne(companyId);
-    if (company == null) {
-      throw new NotFoundException();
-    }
+    Company company = companyRepository.findById(companyId).orElseThrow(NotFoundException::new);
     model.addAttribute("company", company);
 
     return "company/show";
@@ -67,10 +65,7 @@ public class CompanyController {
       BindingResult bindingResult,
       RedirectAttributes redirectAttributes
   ) {
-    Company company = companyRepository.findOne(companyId);
-    if (company == null) {
-      throw new NotFoundException();
-    }
+    Company company = companyRepository.findById(companyId).orElseThrow(NotFoundException::new);
 
     if (bindingResult.hasErrors()) {
       redirectAttributes.addFlashAttribute("company", company);
@@ -83,6 +78,14 @@ public class CompanyController {
     }
 
     return "redirect:/companies/" + companyId;
+  }
+
+  @DeleteMapping("/{companyId}")
+  public String delete(@PathVariable int companyId) {
+    Company company = companyRepository.findById(companyId).orElseThrow(NotFoundException::new);
+    companyRepository.delete(company);
+
+    return "redirect:/companies";
   }
 
 }
