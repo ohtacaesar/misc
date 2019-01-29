@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+
+<th:block layout:fragment="content">
+  <h2 th:text="${company.history.name}">Company</h2>
+  <form method="post" th:action="@{/companies/{id}(id=${company.id})}" th:object="${company}">
+    <label>name: <input type="text" th:field="*{history.name}"/></label>
+    <label>url: <input type="text" th:field="*{history.url}"/></label>
+    <button type="submit" name="_method" value="PUT">更新</button>
+  </form>
+  <h3>履歴</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>url</th>
+      <th>company_id</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="h : ${company.historyList}">
+      <td th:text="${h.id}"></td>
+      <td th:text="${h.name}"></td>
+      <td th:text="${h.url}"></td>
+      <td th:text="${h.company.id}"></td>
+    </tr>
+    </tbody>
+
+  </table>
+</th:block>
+
+</body>
+</html>
