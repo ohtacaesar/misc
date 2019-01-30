@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,5 +32,11 @@ public class Company {
   @Id
   @GeneratedValue
   private int id;
+
+  @PrePersist
+  @PreUpdate
+  private void preUpdate() {
+    this.history.setCompany(this);
+  }
 
 }

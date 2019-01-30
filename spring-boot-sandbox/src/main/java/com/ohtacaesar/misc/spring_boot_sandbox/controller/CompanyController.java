@@ -52,7 +52,6 @@ public class CompanyController {
     if (bindingResult.hasErrors()) {
       redirectAttributes.addFlashAttribute("company", company);
     } else {
-      company.getHistory().setCompany(company);
       companyRepository.save(company);
     }
     return "redirect:/companies";
@@ -72,8 +71,6 @@ public class CompanyController {
     } else {
       CompanyHistory history = posted.getHistory();
       company.setHistory(history);
-      history.setId(0);
-      history.setCompany(company);
       companyRepository.save(company);
     }
 
