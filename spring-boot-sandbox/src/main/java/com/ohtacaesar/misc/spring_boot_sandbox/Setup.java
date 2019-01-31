@@ -41,7 +41,7 @@ public class Setup {
 
     for (int i = 0; i < 10; i++) {
       Company company = new Company();
-      CompanyHistory history = company.getHistory();
+      CompanyHistory history = company.getLatest();
       history.setName("カンパニー" + i);
       history.setUrl("http://company" + i + ".com");
       em.persist(company);
