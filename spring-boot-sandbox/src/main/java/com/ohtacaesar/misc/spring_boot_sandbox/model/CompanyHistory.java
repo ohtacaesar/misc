@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import lombok.Getter;
@@ -14,13 +15,11 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
-@JsonIdentityInfo(
-    generator = ObjectIdGenerators.PropertyGenerator.class,
-    property = "id"
-)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class CompanyHistory {
 
   @ManyToOne
+  @JoinColumn(nullable = false)
   private Company company;
 
   @Id
