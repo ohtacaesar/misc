@@ -1,6 +1,6 @@
 package com.ohtacaesar.misc.spring_boot_sandbox.controller;
 
-import com.ohtacaesar.misc.spring_boot_sandbox.CompanyRepository;
+import com.ohtacaesar.misc.spring_boot_sandbox.repository.CompanyRepository;
 import com.ohtacaesar.misc.spring_boot_sandbox.NotFoundException;
 import com.ohtacaesar.misc.spring_boot_sandbox.model.Company;
 import com.ohtacaesar.misc.spring_boot_sandbox.model.CompanyHistory;

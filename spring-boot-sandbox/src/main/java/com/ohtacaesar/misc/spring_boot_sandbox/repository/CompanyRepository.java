@@ -1,4 +1,4 @@
-package com.ohtacaesar.misc.spring_boot_sandbox;
+package com.ohtacaesar.misc.spring_boot_sandbox.repository;
 
 
 import com.ohtacaesar.misc.spring_boot_sandbox.model.Company;
@@ -9,9 +9,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CompanyRepository extends JpaRepository<Company, Integer> {
 
-  Optional<Company> findById(Integer id);
-
-  @EntityGraph(value = "Company")
+  @EntityGraph(value = "Index")
   List<Company> findAll();
+
+  @EntityGraph(value = "Show")
+  Optional<Company> findById(Integer id);
 
 }

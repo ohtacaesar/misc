@@ -2,6 +2,7 @@ package com.ohtacaesar.misc.spring_boot_sandbox;
 
 import com.ohtacaesar.misc.spring_boot_sandbox.model.Company;
 import com.ohtacaesar.misc.spring_boot_sandbox.model.CompanyHistory;
+import com.ohtacaesar.misc.spring_boot_sandbox.model.Service;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -45,6 +46,13 @@ public class Setup {
       history.setName("カンパニー" + i);
       history.setUrl("http://company" + i + ".com");
       em.persist(company);
+
+      for (int j = 0; j < 10; j++) {
+        Service service = new Service();
+        service.setName(String.format("サービス - %d-%d", i, j));
+        service.setCompany(company);
+        em.persist(service);
+      }
     }
 
     Account account = new Account();
