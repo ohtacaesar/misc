@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+  <meta charset="UTF-8"/>
+  <title>FetchType</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+  <ul>
+    <li th:each="o : ${list}">
+      <span th:text="${o.id}"></span>
+      <ul>
+        <li th:each="b : ${o.bList}" th:text="${b.id}"></li>
+      </ul>
+      <ul>
+        <li th:each="c : ${o.cList}" th:text="${c.id}"></li>
+      </ul>
+      <ul>
+        <li th:each="d : ${o.dList}" th:text="${d.id}"></li>
+      </ul>
+    </li>
+  </ul>
+</th:block>
+
+</body>
+</html>
