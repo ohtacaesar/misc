@@ -1,4 +1,4 @@
-package com.ohtacaesar.misc.spring_boot_sandbox.model;
+package com.ohtacaesar.misc.spring_boot_sandbox.dummy.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
