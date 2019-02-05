@@ -1,9 +1,9 @@
-package com.ohtacaesar.misc.spring_boot_sandbox.controller;
+package com.ohtacaesar.misc.spring_boot_sandbox.dummy.controller;
 
-import com.ohtacaesar.misc.spring_boot_sandbox.repository.CompanyRepository;
+import com.ohtacaesar.misc.spring_boot_sandbox.dummy.repository.CompanyRepository;
 import com.ohtacaesar.misc.spring_boot_sandbox.NotFoundException;
-import com.ohtacaesar.misc.spring_boot_sandbox.model.Company;
-import com.ohtacaesar.misc.spring_boot_sandbox.model.CompanyHistory;
+import com.ohtacaesar.misc.spring_boot_sandbox.dummy.model.Company;
+import com.ohtacaesar.misc.spring_boot_sandbox.dummy.model.CompanyHistory;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

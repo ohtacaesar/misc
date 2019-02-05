@@ -1,12 +1,12 @@
-package com.ohtacaesar.misc.spring_boot_sandbox;
+package com.ohtacaesar.misc.spring_boot_sandbox.dummy.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.ohtacaesar.misc.spring_boot_sandbox.Views.Simple;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
+import com.ohtacaesar.misc.spring_boot_sandbox.dummy.model.Company;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,29 +14,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Setter
 @Getter
-@JsonIdentityInfo(
-    generator = ObjectIdGenerators.PropertyGenerator.class,
-    property = "id"
-)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Tag {
-
-  @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
-  private List<ItemTag> itemTagList = new ArrayList<>();
 
   @ManyToMany
   @JoinTable(
-      name = "TAG_PRODUCT",
+      name = "TAG_COMPANY",
       joinColumns = @JoinColumn(name = "TAG_ID"),
-      inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID")
+      inverseJoinColumns = @JoinColumn(name = "COMPANY_ID")
   )
-  private List<Product> productList = new ArrayList<>();
+  private Set<Company> companySet = new HashSet<>();
 
   @Id
   @GeneratedValue

@@ -1,7 +1,9 @@
-package com.ohtacaesar.misc.spring_boot_sandbox;
+package com.ohtacaesar.misc.spring_boot_sandbox.dummy.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.ohtacaesar.misc.spring_boot_sandbox.Views.Simple;
+import com.ohtacaesar.misc.spring_boot_sandbox.dummy.model.Tag;
+import com.ohtacaesar.misc.spring_boot_sandbox.dummy.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;

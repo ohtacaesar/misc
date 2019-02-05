@@ -11,12 +11,12 @@
 <input type="hidden" id="context-path" th:value="@{/}"/>
 <div>
   <h1><a href="/">テスト</a></h1>
-  <div>
-    <a th:href="@{/tags}">タグ</a> | <a th:href="@{/items}">アイテム</a> | <a
-      th:href="@{/products}">プロダクト</a> | <a th:href="@{/security}">セキュリティ</a> | <a
-      th:href="@{/admin}">アドミン</a> | <a th:href="@{/companies}">Companies</a> | <a
-      th:href="@{/services}">Services</a>
-  </div>
+  <ul>
+    <li><a th:href="@{/admin}">アドミン</a></li>
+    <li><a th:href="@{/security}">セキュリティ</a></li>
+    <li><a th:href="@{/tags}">Tags</a></li>
+    <li><a th:href="@{/companies}">Companies</a></li>
+  </ul>
   <th:block layout:fragment="content"></th:block>
 </div>
 
