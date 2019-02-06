@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class HibernateInterceptor extends EmptyInterceptor {
 
-  private static final ThreadLocal<List<String>> sqlList = new ThreadLocal<>();
+  private ThreadLocal<List<String>> sqlList = new ThreadLocal<>();
 
   public void init() {
     System.out.println(getClass() + "#init: " + Thread.currentThread().getId());
@@ -24,7 +24,6 @@ public class HibernateInterceptor extends EmptyInterceptor {
     System.out.println(getClass() + "#onPrepareStatement: " + Thread.currentThread().getId());
     System.out.println(sql);
     List<String> list = this.getSqlList();
-    System.out.println(list);
 
     if (list != null) {
       list.add(sql);

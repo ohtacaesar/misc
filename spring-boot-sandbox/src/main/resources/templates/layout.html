@@ -18,6 +18,9 @@
     <li><a th:href="@{/companies}">Companies</a></li>
   </ul>
   <th:block layout:fragment="content"></th:block>
+  <ul>
+    <li th:each="sql : ${sqlList}" th:text="${sql}"></li>
+  </ul>
 </div>
 
 
