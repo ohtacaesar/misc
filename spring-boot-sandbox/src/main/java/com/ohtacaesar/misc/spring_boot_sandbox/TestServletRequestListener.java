@@ -9,11 +9,9 @@ public class TestServletRequestListener implements ServletRequestListener {
 
   @Override
   public void requestDestroyed(ServletRequestEvent sre) {
-    System.out.println(getClass() + "#requestDestroyed");
   }
 
   @Override
   public void requestInitialized(ServletRequestEvent sre) {
-    System.out.println(getClass() + "#requestInitialized");
   }
 }
