@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -48,11 +49,11 @@ public class Company {
   @OneToOne(cascade = CascadeType.PERSIST)
   private CompanyHistory latest = new CompanyHistory();
 
-  @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @Fetch(FetchMode.SUBSELECT)
   private List<CompanyHistory> historyList = new ArrayList<>();
 
-  @OneToMany(mappedBy = "company")
+  @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
   @Fetch(FetchMode.SUBSELECT)
   private List<Service> serviceList = new ArrayList<>();
 
