@@ -19,7 +19,9 @@
   </ul>
   <th:block layout:fragment="content"></th:block>
   <ul>
-    <li th:each="sql : ${sqlList}" th:text="${sql}"></li>
+    <li th:each="sql : ${sqlList}">
+      <pre test:nl2br="${sql}"></pre>
+    </li>
   </ul>
 </div>
 
