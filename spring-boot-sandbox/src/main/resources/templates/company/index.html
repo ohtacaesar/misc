@@ -22,6 +22,7 @@
       <th>name</th>
       <th>url</th>
       <th>id</th>
+      <th>serviceList.size()</th>
     </tr>
     </thead>
     <tbody>
@@ -31,6 +32,7 @@
              th:text="${o.latest.name}"></a></td>
       <td th:text="${o.latest.url}"></td>
       <td th:text="${o.latest.company.id}"></td>
+      <td th:text="${o.serviceList.size()}"></td>
       <td>
         <form th:action="@{/companies/{id}(id=${o.id})}" method="post">
           <button type="submit" name="_method" value="DELETE">削除</button>

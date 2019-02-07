@@ -14,25 +14,24 @@ public class TestHandlerInterceptor implements HandlerInterceptor {
   private HibernateInterceptor interceptor;
 
   @Override
-  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-      throws Exception {
-    System.out.println(getClass() + "#preHandle: " + Thread.currentThread().getId());
+  public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+      Object handler) {
+    System.out.println(Util.getThreadId() + ": " + getClass().getSimpleName() + "#preHandler");
     interceptor.init();
-    System.out.println(interceptor.getSqlList());
     return true;
   }
 
   @Override
   public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-      ModelAndView modelAndView) throws Exception {
+      ModelAndView modelAndView) {
     modelAndView.addObject("sqlList", interceptor.getSqlList());
-    System.out.println(getClass() + "#postHandler: " + Thread.currentThread().getId());
-    System.out.println(interceptor.getSqlList());
-    System.out.println(interceptor.getSqlList().size());
+    System.out.println(Util.getThreadId() + ": " + getClass().getSimpleName() + "#postHandler");
   }
 
   @Override
   public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
-      Object handler, Exception ex) throws Exception {
+      Object handler, Exception ex) {
+    interceptor.clear();
+    System.out.println(Util.getThreadId() + ": " + getClass().getSimpleName() + "#afterCompletion");
   }
 }

@@ -1,9 +1,9 @@
 package com.ohtacaesar.misc.spring_boot_sandbox.dummy.controller;
 
-import com.ohtacaesar.misc.spring_boot_sandbox.dummy.repository.CompanyRepository;
 import com.ohtacaesar.misc.spring_boot_sandbox.NotFoundException;
 import com.ohtacaesar.misc.spring_boot_sandbox.dummy.model.Company;
 import com.ohtacaesar.misc.spring_boot_sandbox.dummy.model.CompanyHistory;
+import com.ohtacaesar.misc.spring_boot_sandbox.dummy.repository.CompanyRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -46,7 +46,11 @@ public class CompanyController {
 
   @GetMapping("/{companyId}")
   public String show(Model model, @PathVariable int companyId) {
-    Company company = companyRepository.findById(companyId).orElseThrow(NotFoundException::new);
+    //Company company = companyRepository.findById(companyId).orElseThrow(NotFoundException::new);
+    Company company = companyRepository.findOne(companyId);
+    if (company == null) {
+      throw new NotFoundException();
+    }
     model.addAttribute("company", company);
 
     return "company/show";

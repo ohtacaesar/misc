@@ -3,6 +3,9 @@ package com.ohtacaesar.misc.spring_boot_sandbox;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.EmptyInterceptor;
+import org.hibernate.Transaction;
+import org.hibernate.engine.jdbc.internal.FormatStyle;
+import org.hibernate.engine.jdbc.internal.Formatter;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -10,8 +13,10 @@ public class HibernateInterceptor extends EmptyInterceptor {
 
   private ThreadLocal<List<String>> sqlList = new ThreadLocal<>();
 
+  private Formatter formatter = FormatStyle.BASIC.getFormatter();
+
   public void init() {
-    System.out.println(getClass() + "#init: " + Thread.currentThread().getId());
+    System.out.println(Util.getThreadId() + ": " + getClass().getSimpleName() + "#init");
     sqlList.set(new ArrayList<>());
   }
 
@@ -19,16 +24,32 @@ public class HibernateInterceptor extends EmptyInterceptor {
     return sqlList.get();
   }
 
+  public void clear() {
+    sqlList.remove();
+  }
+
   @Override
   public String onPrepareStatement(String sql) {
-    System.out.println(getClass() + "#onPrepareStatement: " + Thread.currentThread().getId());
-    System.out.println(sql);
+    System.out
+        .println(Util.getThreadId() + ": " + getClass().getSimpleName() + "#onPrepareStatement");
     List<String> list = this.getSqlList();
 
     if (list != null) {
-      list.add(sql);
+      list.add(formatter.format(sql));
     }
     return sql;
+  }
+
+  @Override
+  public void afterTransactionBegin(Transaction tx) {
+    System.out
+        .println(Util.getThreadId() + ": " + getClass().getSimpleName() + "#afterTransactionBegin");
+  }
+
+  @Override
+  public void afterTransactionCompletion(Transaction tx) {
+    System.out.println(
+        Util.getThreadId() + ": " + getClass().getSimpleName() + "#afterTransactionCompletion");
   }
 
 }
