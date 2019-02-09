@@ -2,9 +2,11 @@ package com.ohtacaesar.misc.spring_boot_sandbox;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import org.springframework.stereotype.Component;
 import org.thymeleaf.dialect.AbstractDialect;
 import org.thymeleaf.processor.IProcessor;
 
+@Component
 public class ThymeleafDialect extends AbstractDialect {
 
   public static final String PREFIX = "test";
