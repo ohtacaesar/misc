@@ -1,6 +1,8 @@
 package com.ohtacaesar.misc.spring_boot_sandbox.dummy.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ohtacaesar.misc.spring_boot_sandbox.Views.Simple;
 import com.ohtacaesar.misc.spring_boot_sandbox.dummy.model.Tag;
 import com.ohtacaesar.misc.spring_boot_sandbox.dummy.repository.TagRepository;
@@ -50,7 +52,10 @@ public class TagController {
 
   @GetMapping(value = "/{tagId}", produces = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
-  public Tag showJson(@PathVariable int tagId) {
-    return tagRepository.findOne(tagId);
+  public String showJson(@PathVariable int tagId) throws JsonProcessingException {
+    Tag tag = tagRepository.findOne(tagId);
+    ObjectMapper objectMapper = new ObjectMapper();
+
+    return objectMapper.writeValueAsString(tag);
   }
 }
