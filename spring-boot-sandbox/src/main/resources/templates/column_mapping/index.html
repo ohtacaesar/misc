@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+
+<th:block layout:fragment="content">
+  <table>
+    <thead>
+    <tr>
+      <th>index</th>
+      <th>name</th>
+      <th>type</th>
+      <th>scale</th>
+      <th>precision</th>
+      <th>displaySize</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c : ${columnList}">
+      <td th:text="${c.index}"></td>
+      <td th:text="${c.name}"></td>
+      <td th:text="${c.type}"></td>
+      <td th:text="${c.scale}" style="text-align: right"></td>
+      <td th:text="${c.precision}" style="text-align: right"></td>
+      <td th:text="${c.displaySize}" style="text-align: right"></td>
+    </tr>
+    </tbody>
+  </table>
+</th:block>
+</body>
+</html>
