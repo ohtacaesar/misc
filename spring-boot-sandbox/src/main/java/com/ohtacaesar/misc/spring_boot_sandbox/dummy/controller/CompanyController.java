@@ -5,6 +5,7 @@ import com.ohtacaesar.misc.spring_boot_sandbox.dummy.model.Company;
 import com.ohtacaesar.misc.spring_boot_sandbox.dummy.model.CompanyHistory;
 import com.ohtacaesar.misc.spring_boot_sandbox.dummy.repository.CompanyRepository;
 import java.util.List;
+import java.util.Map.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -51,7 +52,9 @@ public class CompanyController {
     if (company == null) {
       throw new NotFoundException();
     }
-    model.addAttribute("company", company);
+    if (!model.containsAttribute("company")) {
+      model.addAttribute("company", company);
+    }
 
     return "company/show";
   }
@@ -63,7 +66,9 @@ public class CompanyController {
       RedirectAttributes redirectAttributes
   ) {
     if (bindingResult.hasErrors()) {
-      redirectAttributes.addFlashAttribute("company", company);
+      for (Entry<String, Object> entry : bindingResult.getModel().entrySet()) {
+        redirectAttributes.addFlashAttribute(entry.getKey(), entry.getValue());
+      }
     } else {
       companyRepository.save(company);
     }
@@ -80,7 +85,9 @@ public class CompanyController {
     Company company = companyRepository.findById(companyId).orElseThrow(NotFoundException::new);
 
     if (bindingResult.hasErrors()) {
-      redirectAttributes.addFlashAttribute("company", company);
+      for (Entry<String, Object> entry : bindingResult.getModel().entrySet()) {
+        redirectAttributes.addFlashAttribute(entry.getKey(), entry.getValue());
+      }
     } else {
       CompanyHistory history = posted.getLatest();
       company.setLatest(history);

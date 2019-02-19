@@ -22,6 +22,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.UniqueConstraint;
+import javax.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Fetch;
@@ -47,13 +48,14 @@ import org.hibernate.annotations.FetchMode;
 public class Company {
 
   @OneToOne(cascade = CascadeType.PERSIST)
+  @Valid
   private CompanyHistory latest = new CompanyHistory();
 
   @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @Fetch(FetchMode.SUBSELECT)
   private List<CompanyHistory> historyList = new ArrayList<>();
 
-  @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @Fetch(FetchMode.SUBSELECT)
   private List<Service> serviceList = new ArrayList<>();
 
