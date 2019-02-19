@@ -6,7 +6,7 @@
 
 <th:block layout:fragment="content">
   <h2 th:text="${company.latest.name}">Company</h2>
-  <form method="post" th:action="@{/companies/{id}(id=${company.id})}" th:object="${company}">
+  <form method="post" th:action="@{/companies/{id}(id=${company.id})}" th:object="${companyForm}">
     <p><label>name: <input type="text" th:field="*{latest.name}"/></label></p>
     <p th:errors="*{latest.name}"></p>
     <p><label>url: <input type="text" th:field="*{latest.url}"/></label></p>

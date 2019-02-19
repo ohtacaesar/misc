@@ -14,12 +14,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping("/companies")
@@ -52,8 +54,10 @@ public class CompanyController {
     if (company == null) {
       throw new NotFoundException();
     }
-    if (!model.containsAttribute("company")) {
-      model.addAttribute("company", company);
+
+    model.addAttribute("company", company);
+    if (!model.containsAttribute("companyForm")) {
+      model.addAttribute("companyForm", company);
     }
 
     return "company/show";
@@ -78,7 +82,7 @@ public class CompanyController {
   @PutMapping("/{companyId}")
   public String update(
       @PathVariable int companyId,
-      @Validated Company posted,
+      @ModelAttribute("companyForm") @Validated Company posted,
       BindingResult bindingResult,
       RedirectAttributes redirectAttributes
   ) {
@@ -95,6 +99,7 @@ public class CompanyController {
     }
 
     return "redirect:/companies/" + companyId;
+    //return new RedirectView("redirect:/companies/" + companyId);
   }
 
   @DeleteMapping("/{companyId}")
