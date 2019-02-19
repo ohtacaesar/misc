@@ -19,20 +19,25 @@ public class TestHandlerInterceptor implements HandlerInterceptor {
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
       Object handler) {
+    log.info("----------");
     log.info(Util.getThreadId() + ": " + getClass().getSimpleName() + "#preHandler");
     interceptor.init();
     return true;
   }
 
   @Override
-  public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-      ModelAndView modelAndView) {
+  public void postHandle(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      Object handler,
+      ModelAndView modelAndView
+  ) {
+    log.info(Util.getThreadId() + ": " + getClass().getSimpleName() + "#postHandler");
+
     List<String> sqlList = interceptor.getSqlList();
-    if (modelAndView != null) {
+    if (modelAndView != null && !modelAndView.getViewName().startsWith("redirect:")) {
       modelAndView.addObject("sqlList", sqlList);
     }
-
-    log.info(Util.getThreadId() + ": " + getClass().getSimpleName() + "#postHandler");
   }
 
   @Override
