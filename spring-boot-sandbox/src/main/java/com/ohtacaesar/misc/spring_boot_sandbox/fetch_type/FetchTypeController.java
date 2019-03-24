@@ -6,18 +6,21 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.PersistenceUnit;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/fetch_type")
+@RequestMapping("/fetch-type")
 public class FetchTypeController {
 
   @PersistenceContext
   private EntityManager em;
+
+  @PersistenceUnit
+  private EntityManagerFactory emf;
 
   @GetMapping
   public String index(Model model) {
@@ -26,9 +29,6 @@ public class FetchTypeController {
 
     return "fetch_type/index";
   }
-
-  @Autowired
-  private EntityManagerFactory emf;
 
   @PostConstruct
   private void postConstruct() {

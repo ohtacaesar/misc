@@ -16,7 +16,6 @@ public class HibernateInterceptor extends EmptyInterceptor {
   private Formatter formatter = FormatStyle.BASIC.getFormatter();
 
   public void init() {
-    System.out.println(Util.getThreadId() + ": " + getClass().getSimpleName() + "#init");
     sqlList.set(new ArrayList<>());
   }
 
@@ -30,8 +29,6 @@ public class HibernateInterceptor extends EmptyInterceptor {
 
   @Override
   public String onPrepareStatement(String sql) {
-    System.out
-        .println(Util.getThreadId() + ": " + getClass().getSimpleName() + "#onPrepareStatement");
     List<String> list = this.getSqlList();
 
     if (list != null) {
@@ -42,14 +39,10 @@ public class HibernateInterceptor extends EmptyInterceptor {
 
   @Override
   public void afterTransactionBegin(Transaction tx) {
-    System.out
-        .println(Util.getThreadId() + ": " + getClass().getSimpleName() + "#afterTransactionBegin");
   }
 
   @Override
   public void afterTransactionCompletion(Transaction tx) {
-    System.out.println(
-        Util.getThreadId() + ": " + getClass().getSimpleName() + "#afterTransactionCompletion");
   }
 
 }
