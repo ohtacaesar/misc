@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+
+<th:block layout:fragment="content">
+  <table>
+    <thead>
+    <tr>
+      <th>id</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <th:block th:each="e : ${list}">
+      <tr>
+        <td rowspan="2" th:text="${e.id}"></td>
+        <td th:each="o : ${e.a}" th:text="${o}"></td>
+      </tr>
+      <tr>
+        <td th:each="o : ${e.b}" th:text="${o}"></td>
+      </tr>
+    </th:block>
+    </tbody>
+  </table>
+</th:block>
+</body>
+</html>
