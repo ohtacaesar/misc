@@ -2,7 +2,6 @@ version: '3.2'
 services:
   python:
     image: python
-    volumes:
-      - ./:/root
+    ports:
+      - 34567:34567
     working_dir: /root
-    entrypoint: python3
