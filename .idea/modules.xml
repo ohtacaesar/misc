@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/jekyll-sandbox/jekyll-sandbox.iml" filepath="$PROJECT_DIR$/jekyll-sandbox/jekyll-sandbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/misc.iml" filepath="$PROJECT_DIR$/misc.iml" />
       <module fileurl="file://$PROJECT_DIR$/python-sandbox/python-sandbox.iml" filepath="$PROJECT_DIR$/python-sandbox/python-sandbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/serverless-sandbox/serverless-sandbox.iml" filepath="$PROJECT_DIR$/serverless-sandbox/serverless-sandbox.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-boot-sandbox/spring-boot-sandbox.iml" filepath="$PROJECT_DIR$/spring-boot-sandbox/spring-boot-sandbox.iml" />
     </modules>
   </component>
